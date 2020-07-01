@@ -1,6 +1,6 @@
 <template>
   <div class="form">
-    <form @submit="addTodo">
+    <form @submit="newTodo">
       <input type="text" v-model="title" name="title" placeholder="Add Todo" />
       <input type="submit" value="Submit" class="btn" />
     </form>
@@ -8,21 +8,19 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: "AddTodo",
   data() {
     return {
-      title: ""
-    };
+      title: ''
+    }
   },
   methods: {
-    addTodo(e) {
+    ...mapActions(['addTodo']),
+    newTodo(e) {
       e.preventDefault();
-      const newTodo = {
-        title: this.title,
-        completed: false
-      };
-      this.$emit("add-todo", newTodo);
+      this.addTodo(this.title)
       this.title = "";
     }
   }

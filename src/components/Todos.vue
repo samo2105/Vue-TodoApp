@@ -1,6 +1,6 @@
 <template>
   <div>
-  <div v-bind:key="todo.id" v-for="todo in todos" class="todos">
+  <div v-bind:key="todo.id" v-for="todo in allTodos" class="todos">
     <TodoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
   </div>
   </div>
@@ -8,13 +8,20 @@
 
 <script>
 import TodoItem from './TodoItem.vue'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Todos',
   components: {
     TodoItem
   },
-  props: ["todos"]
+  methods: {
+    ...mapActions(['fetchTodos'])
+  },
+  computed: mapGetters(['allTodos']),
+  created () {
+    this.fetchTodos()
+  }
 }
 </script>
 

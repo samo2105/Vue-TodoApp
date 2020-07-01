@@ -3,16 +3,18 @@
     <p>
       <input type='checkbox' v-on:change="markComplete">
       {{ todo.title }}
-      <button @click="$emit('del-todo', todo.id)" class="del">x</button>
+      <button @click="delTodo(todo.id)" class="del">x</button>
     </p>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: "TodoItem",
   props: ["todo"],
   methods: {
+    ...mapActions(['delTodo']),
     markComplete() {
       this.todo.completed = !this.todo.completed;
     }
