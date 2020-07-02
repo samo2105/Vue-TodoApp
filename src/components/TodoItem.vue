@@ -28,6 +28,9 @@ export default {
 
 <style scoped>
   .todo-item {
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
     background: whitesmoke;
     padding: 10px;
     border-bottom: 1px #ccc dotted;
@@ -41,6 +44,7 @@ export default {
 
   .is-complete {
     text-decoration: line-through;
+    background-color: greenyellow;
   }
 
   .del {

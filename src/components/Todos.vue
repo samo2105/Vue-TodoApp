@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2> Double click to complete todo</h2>
     <div v-bind:key="todo.id" v-for="todo in allTodos" class="todos">
       <TodoItem  v-bind:todo="todo"/>
     </div>
