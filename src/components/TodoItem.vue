@@ -1,7 +1,6 @@
 <template>
-  <div class="todo-item" v-bind:class="{'is-complete': todo.completed}">
+  <div v-on:dblclick="onDblClick(todo)" class="todo-item" v-bind:class="{'is-complete': todo.completed}">
     <p>
-      <input type='checkbox' v-on:change="markComplete">
       {{ todo.title }}
       <button @click="delTodo(todo.id)" class="del">x</button>
     </p>
@@ -14,9 +13,14 @@ export default {
   name: "TodoItem",
   props: ["todo"],
   methods: {
-    ...mapActions(['delTodo']),
-    markComplete() {
-      this.todo.completed = !this.todo.completed;
+    ...mapActions(['delTodo', 'updTodo']),
+    onDblClick(todo) {
+      const modifiedTodo = {
+        id: todo.id,
+        title: todo.title,
+        completed: !todo.completed
+      }
+      this.updTodo(modifiedTodo)
     }
   }
 }
